@@ -21,9 +21,5 @@ module.exports = app => {
     // Delete a Blog with id
     router.delete("/:id", blogs.delete);
   
-    // Delete all blogs
-    router.delete("/", blogs.deleteAll);
-  
     app.use('/api/blogs', router);
   };
-  

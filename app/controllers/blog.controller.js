@@ -116,15 +116,3 @@ exports.delete = (req, res) => {
     } else res.send({ message: `Blog was deleted successfully!` });
   });
 };
-
-// Delete all blogs from the database.
-exports.deleteAll = (req, res) => {
-  Blog.removeAll((err, data) => {
-    if (err)
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while removing all blogs."
-      });
-    else res.send({ message: `All blogs were deleted successfully!` });
-  });
-};
