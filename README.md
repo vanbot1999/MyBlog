@@ -18,5 +18,5 @@ show databases;
 use database;  
 show tables;  
 use tables;  
-DESCRIBE tutorials;
+DESCRIBE blogs;
 ```
