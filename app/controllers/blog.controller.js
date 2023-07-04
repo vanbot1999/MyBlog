@@ -1,6 +1,6 @@
-const Tutorial = require("../models/tutorial.model.js");
+const Blog = require("../models/blog.model.js");
 
-// Create and Save a new Tutorial
+// Create and Save a new Blog
 exports.create = (req, res) => {
     // Validate request
     if (!req.body) {
@@ -10,14 +10,14 @@ exports.create = (req, res) => {
     }
   
     // Create a Tutorial
-    const tutorial = new Tutorial({
+    const blog = new Blog({
       title: req.body.title,
       description: req.body.description,
       published: req.body.published || false
     });
   
     // Save Tutorial in the database
-    Tutorial.create(tutorial, (err, data) => {
+    Blog.create(blog, (err, data) => {
       if (err)
         res.status(500).send({
           message:
@@ -27,26 +27,26 @@ exports.create = (req, res) => {
     });
   };
 
-// Retrieve all Tutorials from the database (with condition).
+// Retrieve all blogs from the database (with condition).
 exports.findAll = (req, res) => {
     const title = req.query.title;
   
-    Tutorial.getAll(title, (err, data) => {
+    Blog.getAll(title, (err, data) => {
       if (err)
         res.status(500).send({
           message:
-            err.message || "Some error occurred while retrieving tutorials."
+            err.message || "Some error occurred while retrieving blogs."
         });
       else res.send(data);
     });
   };
   
   exports.findAllPublished = (req, res) => {
-    Tutorial.getAllPublished((err, data) => {
+    Blog.getAllPublished((err, data) => {
       if (err)
         res.status(500).send({
           message:
-            err.message || "Some error occurred while retrieving tutorials."
+            err.message || "Some error occurred while retrieving blogs."
         });
       else res.send(data);
     });
@@ -54,7 +54,7 @@ exports.findAll = (req, res) => {
 
 // Find a single Tutorial with a id
 exports.findOne = (req, res) => {
-    Tutorial.findById(req.params.id, (err, data) => {
+    Blog.findById(req.params.id, (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({
@@ -69,13 +69,13 @@ exports.findOne = (req, res) => {
     });
   };
 
-// find all published Tutorials
+// find all published blogs
 exports.findAllPublished = (req, res) => {
-    Tutorial.getAllPublished((err, data) => {
+    Blog.getAllPublished((err, data) => {
       if (err)
         res.status(500).send({
           message:
-            err.message || "Some error occurred while retrieving tutorials."
+            err.message || "Some error occurred while retrieving blogs."
         });
       else res.send(data);
     });
@@ -92,9 +92,9 @@ exports.update = (req, res) => {
   
     console.log(req.body);
   
-    Tutorial.updateById(
+    Blog.updateById(
       req.params.id,
-      new Tutorial(req.body),
+      new Blog(req.body),
       (err, data) => {
         if (err) {
           if (err.kind === "not_found") {
@@ -113,7 +113,7 @@ exports.update = (req, res) => {
 
 // Delete a Tutorial with the specified id in the request
 exports.delete = (req, res) => {
-    Tutorial.remove(req.params.id, (err, data) => {
+    Blog.remove(req.params.id, (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({
@@ -128,14 +128,14 @@ exports.delete = (req, res) => {
     });
   };
 
-// Delete all Tutorials from the database.
+// Delete all blogs from the database.
 exports.deleteAll = (req, res) => {
-    Tutorial.removeAll((err, data) => {
+    Blog.removeAll((err, data) => {
       if (err)
         res.status(500).send({
           message:
-            err.message || "Some error occurred while removing all tutorials."
+            err.message || "Some error occurred while removing all blogs."
         });
-      else res.send({ message: `All Tutorials were deleted successfully!` });
+      else res.send({ message: `All blogs were deleted successfully!` });
     });
   };
